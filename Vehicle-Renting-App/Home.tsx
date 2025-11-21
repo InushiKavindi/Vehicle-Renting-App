@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
   Image,
@@ -14,6 +15,7 @@ import {
 } from 'react-native';
 import { MaterialCommunityIcons, MaterialIcons, Octicons } from '@expo/vector-icons';
 import { colors } from './colors';
+import FilterModal from './FilterModal';
 
 const categories = [
   { label: 'Car', icon: 'car' as const },
@@ -72,6 +74,7 @@ const vehicles = [
 ];
 
 export default function Home() {
+  const [filterVisible, setFilterVisible] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
@@ -97,7 +100,7 @@ export default function Home() {
                 cursorColor={colors.primary}
               />
             </View>
-            <Pressable style={styles.filterButton}>
+            <Pressable style={styles.filterButton} onPress={() => setFilterVisible(true)}>
               <MaterialCommunityIcons name="tune-variant" size={26} color={colors.white} />
             </Pressable>
           </View>
@@ -167,6 +170,14 @@ export default function Home() {
           </View>
         ))}
       </ScrollView>
+
+      <FilterModal
+        visible={filterVisible}
+        onClose={() => setFilterVisible(false)}
+        onApply={(filters) => {
+          console.log('Applied filters:', filters);
+        }}
+      />
 
       <View style={styles.bottomNav}>
         <Pressable style={styles.navItem}>
