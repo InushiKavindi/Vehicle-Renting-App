@@ -94,7 +94,12 @@ export default function Home() {
         </ImageBackground>
 
         <Text style={styles.sectionTitle}>Categories</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryScroll}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.categoryScroll}
+          style={{ marginBottom: 8 }}
+        >
           {categories.map((category) => (
             <Pressable key={category.label} style={styles.categoryCard}>
               <View style={styles.categoryIcon}>
@@ -304,14 +309,15 @@ const styles = StyleSheet.create({
   },
   categoryScroll: {
     paddingLeft: 16,
+    paddingRight: 0,
     marginBottom: 8,
   },
   categoryCard: {
-    width: 76,
+    width: 90,
     height: 94,
     borderRadius: 16,
     backgroundColor: colors.categoryBackground,
-    marginRight: 12,
+    marginRight: 13,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
