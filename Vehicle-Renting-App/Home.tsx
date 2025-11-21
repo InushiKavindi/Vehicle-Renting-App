@@ -103,7 +103,7 @@ export default function Home() {
           {categories.map((category) => (
             <Pressable key={category.label} style={styles.categoryCard}>
               <View style={styles.categoryIcon}>
-                <MaterialCommunityIcons name={category.icon} size={24} color={colors.categoryIcon} />
+                <MaterialCommunityIcons name={category.icon} size={28} color={colors.categoryIcon} />
               </View>
               <Text style={styles.categoryLabel}>{category.label}</Text>
             </Pressable>
@@ -329,13 +329,13 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
   },
   categoryIcon: {
-    width: 44,
-    height: 44,
-    borderRadius: 12,
-    backgroundColor: colors.white,
+    width: 52,
+    height: 52,
+    borderRadius: 14,
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 6,
+    marginBottom: -4,
   },
   categoryLabel: {
     fontSize: 13,
