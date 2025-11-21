@@ -48,7 +48,7 @@ const vehicles = [
     price: 'Rs.7000',
     priceUnit: 'P/day',
     rating: 4.6,
-    image: require('./assets/Car 1.png'),
+    image: require('./assets/Car 3.png'),
     isFavorite: false,
   },
   {
@@ -57,7 +57,7 @@ const vehicles = [
     price: 'Rs.4500',
     priceUnit: 'P/day',
     rating: 4.2,
-    image: require('./assets/Car 2.png'),
+    image: require('./assets/Car 4.png'),
     isFavorite: false,
   },
   {
@@ -66,7 +66,7 @@ const vehicles = [
     price: 'Rs.6000',
     priceUnit: 'P/day',
     rating: 4.4,
-    image: require('./assets/Car 1.png'),
+    image: require('./assets/Car 5.png'),
     isFavorite: false,
   },
 ];
@@ -75,7 +75,7 @@ export default function Home() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
-      <ScrollView contentContainerStyle={styles.content}>
+      <ScrollView contentContainerStyle={styles.content} stickyHeaderIndices={[0]}>
         <View style={styles.header}>
           <View style={styles.brandRow}>
             <View style={styles.brandMark}>
@@ -201,6 +201,8 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingTop: Platform.OS === 'android' ? (RNStatusBar.currentHeight ?? 24) + 8 : 16,
     paddingBottom: 20,
+    zIndex: 10,
+    elevation: 10,
   },
   brandRow: {
     flexDirection: 'row',
