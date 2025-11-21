@@ -52,11 +52,12 @@ export default function Home() {
         <View style={styles.header}>
           <View style={styles.brandRow}>
             <View style={styles.brandMark}>
-              <Image source={require('./assets/icon.png')} style={styles.brandLogo} />
+              <Image source={require('./assets/logo.png')} style={styles.brandLogo} />
             </View>
             <Text style={styles.brandText}>Creavint</Text>
             <Pressable style={styles.notificationButton}>
-              <MaterialIcons name="notifications-none" size={22} color={colors.primary} />
+              <MaterialIcons name="notifications-none" size={22} color={colors.white} />
+              <View style={styles.notificationDot} />
             </Pressable>
           </View>
           <View style={styles.searchRow}>
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 14,
-    backgroundColor: colors.white,
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 8,
@@ -197,9 +198,21 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: colors.primaryLight,
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
+  },
+  notificationDot: {
+    position: 'absolute',
+    top: 4,
+    right: 4,
+    width: 10,
+    height: 10,
+    borderRadius: 6,
+    backgroundColor: colors.favorite,
+    borderWidth: 1.5,
+    borderColor: colors.white,
   },
   searchRow: {
     flexDirection: 'row',
