@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import {
   Image,
+  ImageBackground,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -8,6 +9,8 @@ import {
   Text,
   TextInput,
   View,
+  Platform,
+  StatusBar as RNStatusBar,
 } from 'react-native';
 import { MaterialCommunityIcons, MaterialIcons, Octicons } from '@expo/vector-icons';
 import { colors } from './colors';
@@ -72,7 +75,11 @@ export default function Home() {
           </View>
         </View>
 
-        <View style={styles.promoCard}>
+        <ImageBackground
+          source={require('./assets/promo_bg.jpeg')}
+          style={styles.promoCard}
+          imageStyle={styles.promoCardImage}
+        >
           <View style={styles.promoContent}>
             <Text style={styles.promoTitle}>Best Car For Rent Today</Text>
             <Text style={styles.promoPrice}>
@@ -82,8 +89,8 @@ export default function Home() {
               <Text style={styles.bookButtonText}>Book Now</Text>
             </Pressable>
           </View>
-          <Image source={vehicles[0].image} style={styles.promoImage} resizeMode="contain" />
-        </View>
+          <Image source={require('./assets/Promo car.png')} style={styles.promoImage} resizeMode="contain" />
+        </ImageBackground>
 
         <Text style={styles.sectionTitle}>Categories</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryScroll}>
@@ -158,7 +165,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
     padding: 16,
-    paddingTop: 8,
+    paddingTop: Platform.OS === 'android' ? (RNStatusBar.currentHeight ?? 24) + 8 : 16,
     paddingBottom: 20,
   },
   brandRow: {
@@ -231,6 +238,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     overflow: 'hidden',
+  },
+  promoCardImage: {
+    borderRadius: 20,
   },
   promoContent: {
     flex: 1,
