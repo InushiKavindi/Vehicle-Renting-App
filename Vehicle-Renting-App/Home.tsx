@@ -42,6 +42,33 @@ const vehicles = [
     image: require('./assets/Car 2.png'),
     isFavorite: false,
   },
+  {
+    name: 'Nissan X-Trail',
+    location: 'Kandy',
+    price: 'Rs.7000',
+    priceUnit: 'P/day',
+    rating: 4.6,
+    image: require('./assets/Car 1.png'),
+    isFavorite: false,
+  },
+  {
+    name: 'Suzuki Alto',
+    location: 'Galle',
+    price: 'Rs.4500',
+    priceUnit: 'P/day',
+    rating: 4.2,
+    image: require('./assets/Car 2.png'),
+    isFavorite: false,
+  },
+  {
+    name: 'Mitsubishi Lancer',
+    location: 'Negombo',
+    price: 'Rs.6000',
+    priceUnit: 'P/day',
+    rating: 4.4,
+    image: require('./assets/Car 1.png'),
+    isFavorite: false,
+  },
 ];
 
 export default function Home() {
@@ -129,6 +156,7 @@ export default function Home() {
                   <Text style={styles.ratingText}>{vehicle.rating}</Text>
                 </View>
               </View>
+              <View style={styles.divider} />
               <View style={styles.cardBottomRow}>
                 <Text style={styles.locationText}>{vehicle.location}</Text>
                 <Text style={styles.priceText}>
@@ -385,6 +413,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: 12,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: colors.borderLight,
+    marginHorizontal: 8,
     marginBottom: 12,
   },
   carName: {
