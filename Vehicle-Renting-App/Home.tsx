@@ -253,6 +253,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginTop: 20,
     padding: 20,
+    minHeight: 180,
     flexDirection: 'row',
     alignItems: 'center',
     overflow: 'hidden',
@@ -262,6 +263,8 @@ const styles = StyleSheet.create({
   },
   promoContent: {
     flex: 1,
+    position: 'relative',
+    zIndex: 3,
   },
   promoTitle: {
     color: colors.white,
@@ -282,22 +285,24 @@ const styles = StyleSheet.create({
   },
   bookButton: {
     backgroundColor: 'transparent',
-    borderRadius: 18,
-    paddingVertical: 10,
-    paddingHorizontal: 22,
+    borderRadius: 14,
+    paddingVertical: 6,
+    paddingHorizontal: 14,
     alignSelf: 'flex-start',
     borderWidth: 1.5,
     borderColor: colors.white,
   },
   bookButtonText: {
     color: colors.white,
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '600',
   },
   promoImage: {
-    width: 140,
-    height: 100,
-    marginLeft: 10,
+    width: 180,
+    height: 220,
+    position: 'absolute',
+    left: 150,
+    top: 12,
   },
   sectionTitle: {
     fontSize: 20,
