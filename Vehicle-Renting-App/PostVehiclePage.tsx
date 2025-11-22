@@ -25,7 +25,7 @@ type Props = {
 };
 
 export default function PostVehiclePage({ visible, onClose, onNavigate, activeTab = 'post' }: Props) {
-  const [vehicleType, setVehicleType] = useState('Car');
+  const [vehicleType, setVehicleType] = useState('');
   const [driverOption, setDriverOption] = useState<DriverOption>('with');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
@@ -66,7 +66,7 @@ export default function PostVehiclePage({ visible, onClose, onNavigate, activeTa
           <View style={styles.fieldSection}>
             <Text style={styles.fieldLabel}>Vehicle Type</Text>
             <Pressable style={styles.dropdown}>
-              <Text style={styles.dropdownText}>{vehicleType}</Text>
+              <Text style={[styles.dropdownText, !vehicleType && styles.placeholderText]}>{vehicleType || 'Select vehicle type'}</Text>
               <MaterialIcons name="keyboard-arrow-down" size={24} color={colors.textSecondary} />
             </Pressable>
           </View>
@@ -136,7 +136,7 @@ export default function PostVehiclePage({ visible, onClose, onNavigate, activeTa
             <Text style={styles.fieldLabel}>Description</Text>
             <TextInput
               style={styles.textArea}
-              placeholder=""
+              placeholder="Enter features..."
               placeholderTextColor={colors.textSecondary}
               multiline
               numberOfLines={6}
@@ -164,14 +164,16 @@ export default function PostVehiclePage({ visible, onClose, onNavigate, activeTa
           {/* Contact Number */}
           <View style={styles.fieldSection}>
             <Text style={styles.fieldLabel}>Contact Number</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Enter your phone number"
-              placeholderTextColor={colors.textSecondary}
-              keyboardType="phone-pad"
-              value={contactNumber}
-              onChangeText={setContactNumber}
-            />
+            <View style={styles.contactInputWrapper}>
+              <TextInput
+                style={styles.contactTextInput}
+                placeholder="Enter your phone number"
+                placeholderTextColor={colors.textSecondary}
+                keyboardType="phone-pad"
+                value={contactNumber}
+                onChangeText={setContactNumber}
+              />
+            </View>
           </View>
 
           {/* Post Vehicle Button */}
@@ -258,11 +260,14 @@ const styles = StyleSheet.create({
     borderColor: colors.borderLight,
     borderRadius: 8,
     paddingHorizontal: 16,
-    paddingVertical: 14,
+    height: 48,
   },
   dropdownText: {
     fontSize: 15,
     color: colors.textPrimary,
+  },
+  placeholderText: {
+    color: colors.textSecondary,
   },
   radioGroup: {
     flexDirection: 'row',
@@ -353,13 +358,31 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.borderLight,
     borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
+    paddingHorizontal: 12,
+    height: 48,
   },
   textInput: {
     flex: 1,
     fontSize: 15,
     color: colors.textPrimary,
+    height: '100%',
+    padding: 0,
+  },
+
+  /* Contact number input styles */
+  contactInputWrapper: {
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.borderLight,
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    height: 48,
+    justifyContent: 'center',
+  },
+  contactTextInput: {
+    fontSize: 15,
+    color: colors.textPrimary,
+    height: '100%',
     padding: 0,
   },
   postButton: {
