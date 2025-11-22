@@ -16,6 +16,7 @@ import {
 import { MaterialCommunityIcons, MaterialIcons, Octicons } from '@expo/vector-icons';
 import { colors } from './colors';
 import FilterModal from './FilterModal';
+import VehicleDetailsPage from './VehicleDetailsPage';
 
 const categories = [
   { label: 'Car', icon: 'car' as const },
@@ -73,8 +74,11 @@ const vehicles = [
   },
 ];
 
+type Vehicle = typeof vehicles[0];
+
 export default function Home() {
   const [filterVisible, setFilterVisible] = useState(false);
+  const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
@@ -142,7 +146,7 @@ export default function Home() {
 
         <Text style={styles.sectionTitle}>Popular Vehicles</Text>
         {vehicles.map((vehicle) => (
-          <View key={vehicle.name} style={styles.vehicleCard}>
+          <Pressable key={vehicle.name} style={styles.vehicleCard} onPress={() => setSelectedVehicle(vehicle)}>
             <Pressable style={styles.favoriteButton}>
               <MaterialCommunityIcons
                 name={vehicle.isFavorite ? 'heart' : 'heart-outline'}
@@ -167,9 +171,17 @@ export default function Home() {
                 </Text>
               </View>
             </View>
-          </View>
+          </Pressable>
         ))}
       </ScrollView>
+
+      {selectedVehicle && (
+        <VehicleDetailsPage
+          visible={true}
+          vehicle={selectedVehicle}
+          onClose={() => setSelectedVehicle(null)}
+        />
+      )}
 
       <FilterModal
         visible={filterVisible}
