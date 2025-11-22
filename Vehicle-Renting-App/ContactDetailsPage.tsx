@@ -33,20 +33,19 @@ export default function ContactDetailsPage({ visible, vehicleName, vehicleLocati
             <MaterialIcons name="chevron-left" size={28} color={colors.textPrimary} />
           </Pressable>
           
-          {/* Map Placeholder - You can integrate actual map here */}
-          <View style={styles.mapPlaceholder}>
-            <Text style={styles.mapText}>Map View</Text>
-            <View style={styles.locationMarker}>
-              <MaterialIcons name="location-on" size={32} color="#E53935" />
-            </View>
-          </View>
+          {/* Map Image from assets */}
+          <Image
+            source={require('./assets/Map.png')}
+            style={styles.mapImage}
+            resizeMode="cover"
+          />
           
           <View style={styles.locationLabel}>
             <Text style={styles.locationText}>{vehicleLocation}</Text>
           </View>
         </View>
 
-        <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+        <View style={styles.content}>
           {/* Vehicle Title and ID */}
           <View style={styles.titleSection}>
             <Text style={styles.vehicleTitle}>{vehicleName}</Text>
@@ -93,7 +92,7 @@ export default function ContactDetailsPage({ visible, vehicleName, vehicleLocati
           <Pressable style={styles.bookButton}>
             <Text style={styles.bookButtonText}>Book Now</Text>
           </Pressable>
-        </ScrollView>
+        </View>
       </SafeAreaView>
     </Modal>
   );
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   mapSection: {
-    height: 300,
+    height: 420,
     backgroundColor: colors.background,
     position: 'relative',
   },
@@ -132,6 +131,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#E8E8E8',
   },
+  mapImage: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#E8E8E8',
+  },
   mapText: {
     fontSize: 16,
     color: colors.textSecondary,
@@ -146,9 +150,8 @@ const styles = StyleSheet.create({
   },
   locationLabel: {
     position: 'absolute',
-    bottom: 30,
-    left: '50%',
-    transform: [{ translateX: -100 }],
+    top: Platform.OS === 'android' ? (RNStatusBar.currentHeight ?? 24) + 110 : 16,
+    right: 150,
     backgroundColor: colors.white,
     paddingHorizontal: 16,
     paddingVertical: 10,
@@ -158,6 +161,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOffset: { width: 0, height: 2 },
     elevation: 3,
+    zIndex: 11,
   },
   locationText: {
     fontSize: 14,
