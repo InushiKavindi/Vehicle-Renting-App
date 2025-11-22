@@ -28,7 +28,7 @@ const categories = [
 
 const vehicles = [
   {
-    name: 'Toyota Premio',
+    name: 'Toyota Premio 2017',
     location: 'Colombo',
     price: 'Rs.9500',
     priceUnit: 'P/day',

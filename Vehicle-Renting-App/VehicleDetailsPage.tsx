@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from './colors';
+import ContactDetailsPage from './ContactDetailsPage';
 
 type Vehicle = {
   name: string;
@@ -31,6 +32,8 @@ type Props = {
 };
 
 export default function VehicleDetailsPage({ visible, vehicle, onClose }: Props) {
+  const [contactDetailsVisible, setContactDetailsVisible] = useState(false);
+
   return (
     <Modal visible={visible} animationType="slide" onRequestClose={onClose}>
       <SafeAreaView style={styles.container}>
@@ -158,10 +161,19 @@ export default function VehicleDetailsPage({ visible, vehicle, onClose }: Props)
           </View>
 
           {/* Contact Button */}
-          <Pressable style={styles.contactButton}>
+          <Pressable style={styles.contactButton} onPress={() => setContactDetailsVisible(true)}>
             <Text style={styles.contactButtonText}>View Contact Details</Text>
           </Pressable>
         </ScrollView>
+
+        {contactDetailsVisible && (
+          <ContactDetailsPage
+            visible={true}
+            vehicleName={vehicle.name}
+            vehicleLocation={vehicle.location}
+            onClose={() => setContactDetailsVisible(false)}
+          />
+        )}
 
         {/* Bottom Navigation */}
         <View style={styles.bottomNav}>
