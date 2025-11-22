@@ -17,6 +17,7 @@ import { MaterialCommunityIcons, MaterialIcons, Octicons } from '@expo/vector-ic
 import { colors } from './colors';
 import FilterModal from './FilterModal';
 import VehicleDetailsPage from './VehicleDetailsPage';
+import PostVehiclePage from './PostVehiclePage';
 
 const categories = [
   { label: 'Car', icon: 'car' as const },
@@ -79,9 +80,12 @@ type Vehicle = typeof vehicles[0];
 export default function Home() {
   const [filterVisible, setFilterVisible] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
+  const [postVehicleVisible, setPostVehicleVisible] = useState(false);
+  const [activeTab, setActiveTab] = useState<'home' | 'favorites' | 'post' | 'profile'>('home');
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
+      {activeTab === 'home' ? (
       <ScrollView contentContainerStyle={styles.content} stickyHeaderIndices={[0]}>
         <View style={styles.header}>
           <View style={styles.brandRow}>
@@ -174,6 +178,11 @@ export default function Home() {
           </Pressable>
         ))}
       </ScrollView>
+      ) : (
+        <View style={styles.placeholder}>
+          <Text style={styles.placeholderText}>{activeTab === 'favorites' ? 'Favorites' : activeTab === 'profile' ? 'Profile' : activeTab}</Text>
+        </View>
+      )}
 
       {selectedVehicle && (
         <VehicleDetailsPage
@@ -192,19 +201,32 @@ export default function Home() {
       />
 
       <View style={styles.bottomNav}>
-        <Pressable style={styles.navItem}>
-          <MaterialCommunityIcons name="home" size={28} color={colors.primary} />
+        <Pressable style={styles.navItem} onPress={() => setActiveTab('home')}>
+          <MaterialCommunityIcons name="home" size={28} color={activeTab === 'home' ? colors.primary : colors.inactive} />
         </Pressable>
-        <Pressable style={styles.navItem}>
-          <MaterialCommunityIcons name="heart-outline" size={28} color={colors.inactive} />
+        <Pressable style={styles.navItem} onPress={() => setActiveTab('favorites')}>
+          <MaterialCommunityIcons name="heart-outline" size={28} color={activeTab === 'favorites' ? colors.primary : colors.inactive} />
         </Pressable>
-        <Pressable style={styles.navItem}>
-          <MaterialCommunityIcons name="plus-circle-outline" size={28} color={colors.inactive} />
+        <Pressable style={styles.navItem} onPress={() => {
+          console.log('Plus button pressed');
+          setActiveTab('post');
+          setPostVehicleVisible(true);
+        }}>
+          <MaterialCommunityIcons name="plus-circle-outline" size={28} color={activeTab === 'post' ? colors.primary : colors.inactive} />
         </Pressable>
-        <Pressable style={styles.navItem}>
-          <MaterialCommunityIcons name="account-circle-outline" size={28} color={colors.inactive} />
+        <Pressable style={styles.navItem} onPress={() => setActiveTab('profile')}>
+          <MaterialCommunityIcons name="account-circle-outline" size={28} color={activeTab === 'profile' ? colors.primary : colors.inactive} />
         </Pressable>
       </View>
+
+      <PostVehiclePage
+        visible={postVehicleVisible}
+        onClose={() => setPostVehicleVisible(false)}
+        onNavigate={(tab) => {
+          setPostVehicleVisible(false);
+          setActiveTab(tab);
+        }}
+      />
     </SafeAreaView>
   );
 }
@@ -226,6 +248,31 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     zIndex: 10,
     elevation: 10,
+  },
+  plusOuter: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  plusActive: {
+    backgroundColor: colors.primary,
+  },
+  plusInactive: {
+    backgroundColor: colors.background,
+    borderWidth: 1,
+    borderColor: colors.borderLight,
+  },
+  placeholder: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  placeholderText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: colors.textPrimary,
   },
   brandRow: {
     flexDirection: 'row',
