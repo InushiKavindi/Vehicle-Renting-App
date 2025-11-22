@@ -66,17 +66,17 @@ export default function VehicleDetailsPage({ visible, vehicle, onClose }: Props)
             {/* Thumbnail Images */}
             <View style={styles.thumbnailRow}>
               <Image
-                source={vehicle.image}
+                source={require('./assets/Car 1.1.jpg')}
                 style={styles.thumbnail}
                 resizeMode="cover"
               />
               <Image
-                source={vehicle.image}
+                source={require('./assets/Car 1.2.jpeg')}
                 style={styles.thumbnail}
                 resizeMode="cover"
               />
               <Image
-                source={vehicle.image}
+                source={require('./assets/Car 1.3.jpg')}
                 style={styles.thumbnail}
                 resizeMode="cover"
               />
@@ -134,11 +134,11 @@ export default function VehicleDetailsPage({ visible, vehicle, onClose }: Props)
 
           {/* Availability Section */}
           <View style={styles.availabilitySection}>
-            <View style={styles.infoRow}>
+            <View style={styles.availabilityRow}>
               <Text style={styles.infoLabel}>Availability:</Text>
               <Text style={styles.infoValue}>12 Nov – 30 Dec 2025</Text>
             </View>
-            <View style={styles.infoRow}>
+            <View style={styles.availabilityRow}>
               <Text style={styles.infoLabel}>Pickup Location:</Text>
               <Text style={styles.infoValue}>Colombo 06 – Wellawatte</Text>
             </View>
@@ -223,14 +223,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     paddingHorizontal: 16,
     paddingTop: Platform.OS === 'android' ? (RNStatusBar.currentHeight ?? 24) + 8 : 16,
-    paddingBottom: 16,
-    marginBottom: 16,
+    paddingBottom: 8,
+    marginBottom: 8,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   headerInImage: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 0,
   },
   backButtonInImage: {
     width: 40,
@@ -249,10 +251,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   mainImageContainer: {
-    height: 180,
+    height: 220,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 5,
   },
   mainImage: {
     width: '100%',
@@ -334,6 +336,12 @@ const styles = StyleSheet.create({
   availabilitySection: {
     paddingHorizontal: 16,
     marginBottom: 20,
+  },
+  availabilityRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
   },
   infoRow: {
     paddingVertical: 10,
