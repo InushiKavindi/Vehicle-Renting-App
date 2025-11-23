@@ -24,8 +24,8 @@ type Props = {
 
 export default function ProfilePage({ asPage = false, onNavigate, onClose }: Props) {
   const user = {
-    name: 'John Doe',
-    email: 'johndoe@gmail.com',
+    name: 'Lisa Wilson',
+    email: 'lisawilson@gmail.com',
     location: 'Colombo, Sri Lanka',
     avatar: require('./assets/profile image.png'),
     joined: 'March 2023',
