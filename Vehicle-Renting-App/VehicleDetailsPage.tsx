@@ -175,21 +175,7 @@ export default function VehicleDetailsPage({ visible, vehicle, onClose }: Props)
           />
         )}
 
-        {/* Bottom Navigation */}
-        <View style={styles.bottomNav}>
-          <Pressable style={styles.navItem}>
-            <MaterialCommunityIcons name="home" size={28} color={colors.primary} />
-          </Pressable>
-          <Pressable style={styles.navItem}>
-            <MaterialCommunityIcons name="heart-outline" size={28} color={colors.inactive} />
-          </Pressable>
-          <Pressable style={styles.navItem}>
-            <MaterialCommunityIcons name="plus-circle-outline" size={28} color={colors.inactive} />
-          </Pressable>
-          <Pressable style={styles.navItem}>
-            <MaterialCommunityIcons name="account-circle-outline" size={28} color={colors.inactive} />
-          </Pressable>
-        </View>
+        {/* Bottom navigation removed for vehicle details page */}
       </SafeAreaView>
     </Modal>
   );
@@ -402,30 +388,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     marginHorizontal: 16,
-    marginBottom: 80,
+    marginBottom: 24,
   },
   contactButtonText: {
     color: colors.white,
     fontWeight: '700',
     fontSize: 16,
   },
-  bottomNav: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 70,
-    backgroundColor: colors.white,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    borderTopWidth: 1,
-    borderTopColor: colors.borderLight,
-    paddingBottom: 10,
-  },
-  navItem: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 8,
-  },
+  // bottom navigation removed
 });

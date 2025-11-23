@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: colors.white,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: colors.borderDark,
     borderRadius: 8,
     paddingHorizontal: 16,
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
   uploadBox: {
     width: 90,
     height: 90,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: colors.textSecondary,
     borderStyle: 'dashed',
     borderRadius: 8,
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
   },
   textArea: {
     backgroundColor: colors.white,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: colors.borderDark,
     borderRadius: 8,
     paddingHorizontal: 16,
@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.white,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: colors.borderDark,
     borderRadius: 8,
     paddingHorizontal: 12,
@@ -359,7 +359,7 @@ const styles = StyleSheet.create({
   /* Contact number input styles */
   contactInputWrapper: {
     backgroundColor: colors.white,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: colors.borderDark,
     borderRadius: 10,
     paddingHorizontal: 12,
