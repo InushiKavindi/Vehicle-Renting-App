@@ -18,6 +18,8 @@ import { colors } from './colors';
 import FilterModal from './FilterModal';
 import VehicleDetailsPage from './VehicleDetailsPage';
 import PostVehiclePage from './PostVehiclePage';
+import FavoritesPage from './FavoritesPage';
+import ProfilePage from './ProfilePage';
 
 const categories = [
   { label: 'Car', icon: 'car' as const },
@@ -80,7 +82,6 @@ type Vehicle = typeof vehicles[0];
 export default function Home() {
   const [filterVisible, setFilterVisible] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
-  const [postVehicleVisible, setPostVehicleVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<'home' | 'favorites' | 'post' | 'profile'>('home');
   return (
     <SafeAreaView style={styles.container}>
@@ -178,9 +179,31 @@ export default function Home() {
           </Pressable>
         ))}
       </ScrollView>
+      ) : activeTab === 'post' ? (
+        <PostVehiclePage
+          asPage
+          activeTab={activeTab}
+          onNavigate={(tab) => setActiveTab(tab)}
+          onClose={() => setActiveTab('home')}
+        />
+      ) : activeTab === 'favorites' ? (
+        <FavoritesPage
+          asPage
+          activeTab={activeTab}
+          favorites={vehicles.filter((v) => v.isFavorite)}
+          onNavigate={(tab) => setActiveTab(tab)}
+          onClose={() => setActiveTab('home')}
+        />
+      ) : activeTab === 'profile' ? (
+        <ProfilePage
+          asPage
+          activeTab={activeTab}
+          onNavigate={(tab) => setActiveTab(tab)}
+          onClose={() => setActiveTab('home')}
+        />
       ) : (
         <View style={styles.placeholder}>
-          <Text style={styles.placeholderText}>{activeTab === 'favorites' ? 'Favorites' : activeTab === 'profile' ? 'Profile' : activeTab}</Text>
+          <Text style={styles.placeholderText}>{activeTab}</Text>
         </View>
       )}
 
@@ -210,7 +233,6 @@ export default function Home() {
         <Pressable style={styles.navItem} onPress={() => {
           console.log('Plus button pressed');
           setActiveTab('post');
-          setPostVehicleVisible(true);
         }}>
           <MaterialCommunityIcons name="plus-circle-outline" size={28} color={activeTab === 'post' ? colors.primary : colors.inactive} />
         </Pressable>
@@ -218,15 +240,7 @@ export default function Home() {
           <MaterialCommunityIcons name="account-circle-outline" size={28} color={activeTab === 'profile' ? colors.primary : colors.inactive} />
         </Pressable>
       </View>
-
-      <PostVehiclePage
-        visible={postVehicleVisible}
-        onClose={() => setPostVehicleVisible(false)}
-        onNavigate={(tab) => {
-          setPostVehicleVisible(false);
-          setActiveTab(tab);
-        }}
-      />
+      
     </SafeAreaView>
   );
 }

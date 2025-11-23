@@ -112,17 +112,21 @@ export default function FilterModal({ visible, onClose, onApply }: Props) {
 
           <View style={styles.field}>
             <Text style={styles.fieldLabel}>Price Range</Text>
-            <View style={styles.priceRow}>
-              <View style={styles.pricePill}>
-                <Text style={styles.pricePillText}>LKR {minPrice}</Text>
-              </View>
-              <View style={styles.pricePillRight}>
-                <Text style={styles.pricePillText}>LKR {maxPrice}</Text>
-              </View>
-            </View>
 
             <View style={styles.sliderTrack}>
+              {/* price labels directly above each knob */}
+              <View style={[styles.priceLabel, ({ left: minPct } as any)]}>
+                <Text style={styles.pricePillText}>LKR {minPrice}</Text>
+              </View>
+              <View style={[styles.priceLabel, ({ left: maxPct } as any)]}>
+                <Text style={styles.pricePillText}>LKR {maxPrice}</Text>
+              </View>
+
+              {/* base and filled range */}
+              <View style={styles.sliderBase} />
               <View style={[styles.sliderFill, ({ left: minPct, right: fillRightPct } as any)]} />
+
+              {/* knobs */}
               <View style={[styles.knob, ({ left: minPct } as any)]} />
               <View style={[styles.knob, ({ left: maxPct } as any)]} />
             </View>
@@ -208,7 +212,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   fieldLabel: {
-    marginBottom: 8,
+    marginBottom: 12,
     color: colors.textPrimary,
     fontSize: 14,
   },
@@ -287,9 +291,33 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 13,
   },
+  priceLabel: {
+    position: 'absolute',
+    top: -40,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 18,
+    borderWidth: 1.5,
+    borderColor: colors.primary,
+    backgroundColor: colors.white,
+    minWidth: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+    // center horizontally above knob (knob is centered via translateX:-9)
+    marginLeft: -40,
+  },
   sliderTrack: {
     height: 36,
     justifyContent: 'center',
+    marginTop: 40,
+  },
+  sliderBase: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    height: 4,
+    backgroundColor: colors.borderLight,
+    borderRadius: 4,
   },
   sliderFill: {
     position: 'absolute',
@@ -309,6 +337,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },
     elevation: 3,
+    transform: [{ translateX: -9 }],
   },
   locationRow: {
     flexDirection: 'row',

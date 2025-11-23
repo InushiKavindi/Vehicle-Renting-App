@@ -18,13 +18,14 @@ import { colors } from './colors';
 type DriverOption = 'with' | 'without';
 
 type Props = {
-  visible: boolean;
+  visible?: boolean;
+  asPage?: boolean;
   onClose?: () => void;
   onNavigate?: (tab: 'home' | 'favorites' | 'post' | 'profile') => void;
   activeTab?: 'home' | 'favorites' | 'post' | 'profile';
 };
 
-export default function PostVehiclePage({ visible, onClose, onNavigate, activeTab = 'post' }: Props) {
+export default function PostVehiclePage({ visible, asPage = false, onClose, onNavigate, activeTab = 'post' }: Props) {
   const [vehicleType, setVehicleType] = useState('');
   const [driverOption, setDriverOption] = useState<DriverOption>('with');
   const [description, setDescription] = useState('');
@@ -50,11 +51,10 @@ export default function PostVehiclePage({ visible, onClose, onNavigate, activeTa
     });
   };
 
-  return (
-    <Modal visible={visible} animationType="slide" onRequestClose={onClose}>
-      <SafeAreaView style={styles.container}>
-        <RNStatusBar barStyle="dark-content" />
-      
+  const Content = (
+    <SafeAreaView style={styles.container}>
+      <RNStatusBar barStyle="dark-content" />
+
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
@@ -66,7 +66,7 @@ export default function PostVehiclePage({ visible, onClose, onNavigate, activeTa
           <View style={styles.fieldSection}>
             <Text style={styles.fieldLabel}>Vehicle Type</Text>
             <Pressable style={styles.dropdown}>
-              <Text style={[styles.dropdownText, !vehicleType && styles.placeholderText]}>{vehicleType || 'Select vehicle type'}</Text>
+              <Text style={[styles.dropdownText, !vehicleType && styles.placeholderText]}>{vehicleType || 'select vehicle type'}</Text>
               <MaterialIcons name="keyboard-arrow-down" size={24} color={colors.textSecondary} />
             </Pressable>
           </View>
@@ -104,29 +104,6 @@ export default function PostVehiclePage({ visible, onClose, onNavigate, activeTa
               <Pressable style={styles.uploadBox} onPress={handleImageUpload}>
                 <MaterialIcons name="add" size={32} color={colors.textSecondary} />
               </Pressable>
-              
-              {/* Sample uploaded images */}
-              {/* <View style={styles.uploadedImage}>
-                <Image
-                  source={require('./assets/Car 1.2.jpeg')}
-                  style={styles.imagePreview}
-                  resizeMode="cover"
-                />
-                <Pressable style={styles.removeImageButton}>
-                  <MaterialIcons name="close" size={16} color={colors.white} />
-                </Pressable>
-              </View>
-
-              <View style={styles.uploadedImage}>
-                <Image
-                  source={require('./assets/Car 1.3.jpg')}
-                  style={styles.imagePreview}
-                  resizeMode="cover"
-                />
-                <Pressable style={styles.removeImageButton}>
-                  <MaterialIcons name="close" size={16} color={colors.white} />
-                </Pressable>
-              </View> */}
             </View>
             <Text style={styles.uploadHint}>Upload up to 4 images</Text>
           </View>
@@ -136,7 +113,7 @@ export default function PostVehiclePage({ visible, onClose, onNavigate, activeTa
             <Text style={styles.fieldLabel}>Description</Text>
             <TextInput
               style={styles.textArea}
-              placeholder="Enter features..."
+              placeholder="Enter Features..."
               placeholderTextColor={colors.textSecondary}
               multiline
               numberOfLines={6}
@@ -183,7 +160,8 @@ export default function PostVehiclePage({ visible, onClose, onNavigate, activeTa
         </View>
       </ScrollView>
 
-      {/* Bottom Tab Bar */}
+      {/* Bottom Tab Bar - hidden when rendered inline as a page */}
+      {!asPage && (
         <View style={styles.tabBar}>
           <Pressable style={styles.tabItem} onPress={() => { onNavigate?.('home'); onClose?.(); }}>
             <MaterialIcons name="home" size={28} color={activeTab === 'home' ? colors.primary : colors.inactive} />
@@ -197,8 +175,18 @@ export default function PostVehiclePage({ visible, onClose, onNavigate, activeTa
           <Pressable style={styles.tabItem} onPress={() => { onNavigate?.('profile'); onClose?.(); }}>
             <MaterialCommunityIcons name="account-outline" size={28} color={activeTab === 'profile' ? colors.primary : colors.inactive} />
           </Pressable>
-      </View>
+        </View>
+      )}
     </SafeAreaView>
+  );
+
+  if (asPage) {
+    return Content;
+  }
+
+  return (
+    <Modal visible={!!visible} animationType="slide" onRequestClose={onClose}>
+      {Content}
     </Modal>
   );
 }
@@ -232,11 +220,12 @@ const styles = StyleSheet.create({
     width: 40,
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: '700',
     color: colors.textPrimary,
     flex: 1,
     textAlign: 'center',
+    marginTop: 5,
   },
   content: {
     padding: 20,
