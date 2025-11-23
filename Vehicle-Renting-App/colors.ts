@@ -17,11 +17,12 @@ export const colors = {
   black: '#000000',
   background: '#F5F7FA',
   cardBackground: '#FFFFFF',
-  imageBackground: '#E8ECEF',
+  imageBackground: '#F1F5F9',
   
   // Border colors
   border: '#E5E9F2',
   borderLight: '#F0F0F0',
+  borderDark: '#64748B',
   
   // Status colors
   favorite: '#FF3B30',

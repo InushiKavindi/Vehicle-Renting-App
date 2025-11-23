@@ -112,7 +112,7 @@ export default function FavoritesPage({ asPage = false, onNavigate, onClose, act
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.background },
+  container: { flex: 1, backgroundColor: colors.white },
   headerSection: {
     backgroundColor: colors.primary,
     paddingTop: Platform.OS === 'android' ? (RNStatusBar.currentHeight ?? 24) + 16 : 32,

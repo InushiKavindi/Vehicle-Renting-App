@@ -197,7 +197,7 @@ export default function PostVehiclePage({ visible, asPage = false, onClose, onNa
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.white,
   },
   scrollView: {
     flex: 1,
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: colors.borderLight,
+    borderColor: colors.borderDark,
     borderRadius: 8,
     paddingHorizontal: 16,
     height: 48,
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
   textArea: {
     backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: colors.borderLight,
+    borderColor: colors.borderDark,
     borderRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -343,7 +343,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: colors.borderLight,
+    borderColor: colors.borderDark,
     borderRadius: 8,
     paddingHorizontal: 12,
     height: 48,
@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
   contactInputWrapper: {
     backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: colors.borderLight,
+    borderColor: colors.borderDark,
     borderRadius: 10,
     paddingHorizontal: 12,
     height: 48,
@@ -388,7 +388,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: colors.white,
     borderTopWidth: 1,
-    borderTopColor: colors.borderLight,
+    borderTopColor: colors.borderDark,
     paddingBottom: Platform.OS === 'ios' ? 20 : 10,
     paddingTop: 10,
     elevation: 8,
@@ -416,6 +416,6 @@ const styles = StyleSheet.create({
   addButtonInactive: {
     backgroundColor: colors.background,
     borderWidth: 1,
-    borderColor: colors.borderLight,
+    borderColor: colors.borderDark,
   },
 });
