@@ -53,12 +53,15 @@ export default function PostVehiclePage({ visible, asPage = false, onClose, onNa
 
   const Content = (
     <SafeAreaView style={styles.container}>
-      <RNStatusBar barStyle="dark-content" />
+      <RNStatusBar barStyle="light-content" />
 
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Post a Vehicle</Text>
+        {/* Header Section */}
+        <View style={styles.headerSection}>
+          <View style={styles.headerContent}>
+            <Text style={styles.headerTitle}>Post a Vehicle</Text>
+            <Text style={styles.headerSubtitle}>List your vehicle for rent</Text>
+          </View>
         </View>
 
         <View style={styles.content}>
@@ -194,41 +197,36 @@ export default function PostVehiclePage({ visible, asPage = false, onClose, onNa
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,
   },
-  header: {
-    paddingTop: Platform.OS === 'android' ? (RNStatusBar.currentHeight ?? 24) : 0,
-    paddingBottom: 16,
+  headerSection: {
+    backgroundColor: colors.primary,
+    paddingTop: Platform.OS === 'android' ? (RNStatusBar.currentHeight ?? 24) + 16 : 32,
+    paddingBottom: 20,
     paddingHorizontal: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: colors.white,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.borderLight,
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
   },
-  backButton: {
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
+  headerContent: {
     alignItems: 'center',
-  },
-  headerSpacer: {
-    width: 40,
   },
   headerTitle: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '700',
-    color: colors.textPrimary,
-    flex: 1,
-    textAlign: 'center',
-    marginTop: 5,
+    color: colors.white,
+    marginBottom: 4,
+  },
+  headerSubtitle: {
+    fontSize: 14,
+    color: 'rgba(255,255,255,0.85)',
+    marginTop: 4,
   },
   content: {
     padding: 20,
+    paddingTop: 24,
     paddingBottom: 100,
   },
   fieldSection: {
@@ -295,7 +293,7 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
     borderWidth: 2,
-    borderColor: colors.borderLight,
+    borderColor: colors.textSecondary,
     borderStyle: 'dashed',
     borderRadius: 8,
     justifyContent: 'center',
